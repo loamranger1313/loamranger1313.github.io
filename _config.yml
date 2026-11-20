@@ -1,0 +1,64 @@
+# Native GitHub Pages build from the main branch, folder / (root).
+# Plugins below are on the Pages allowlist (feed, seo, sitemap, paginate).
+# Pages also always enables jekyll-optional-front-matter, jekyll-readme-index,
+# and jekyll-titles-from-headings. README.md is excluded so it is not published.
+# Do not add a .nojekyll file. Do not add plugins outside the allowlist unless
+# you switch the repository to a GitHub Actions build.
+
+title: Casey Henderson
+description: Security writeups and lab notes
+url: "https://loamranger1313.github.io"
+# User site, served at the domain root. A project site would set this to "/repo".
+baseurl: ""
+lang: en
+timezone: UTC
+
+author:
+  name: Casey Henderson
+
+markdown: kramdown
+highlighter: rouge
+permalink: /:categories/:year/:month/:day/:title/
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+
+paginate: 10
+paginate_path: "/page/:num/"
+
+sass:
+  style: compressed
+
+feed:
+  path: feed.xml
+  posts_limit: 20
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .bundle
+  - .gitignore
+  - .sass-cache
+  - .jekyll-cache
+
+future: false

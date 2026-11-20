@@ -1,0 +1,30 @@
+---
+layout: page
+title: Categories
+permalink: /categories/
+description: Notes grouped by category.
+---
+
+<p>A post uses one category. <code>writeups</code> also appears on the <a href="{{ '/writeups/' | relative_url }}">Writeups</a> page, and <code>labs</code> on the <a href="{{ '/labs/' | relative_url }}">Labs</a> page. Other category names are listed only here. Tags are on the <a href="{{ '/tags/' | relative_url }}">tags</a> page.</p>
+
+{% assign cats = site.categories | sort %}
+{% if cats.size > 0 %}
+<ul class="tag-index">
+  {% for cat in cats %}
+    <li><a class="tag" href="#{{ cat[0] | slugify }}">{{ cat[0] }} <span class="count">{{ cat[1].size }}</span></a></li>
+  {% endfor %}
+</ul>
+{% for cat in cats %}
+  <h2 id="{{ cat[0] | slugify }}">{{ cat[0] }}</h2>
+  <ul class="archive">
+    {% for post in cat[1] %}
+      <li>
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endfor %}
+{% else %}
+<p>No categories yet.</p>
+{% endif %}

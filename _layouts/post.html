@@ -1,0 +1,50 @@
+---
+layout: default
+---
+<article class="post">
+  <header class="post-header">
+    <p class="kicker">
+      {% assign cat = page.categories | first %}
+      {% if cat == "writeups" %}
+        <a href="{{ '/writeups/' | relative_url }}">{{ cat }}</a>
+      {% elsif cat == "labs" %}
+        <a href="{{ '/labs/' | relative_url }}">{{ cat }}</a>
+      {% elsif cat %}
+        <a href="{{ '/categories/' | relative_url }}#{{ cat | slugify }}">{{ cat }}</a>
+      {% endif %}
+      {% if cat %}
+        <span aria-hidden="true">·</span>
+      {% endif %}
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+    </p>
+    <h1>{{ page.title }}</h1>
+  </header>
+  <div class="post-body">
+    {{ content }}
+  </div>
+  {% if page.tags.size > 0 %}
+    <p class="tags">
+      {% for tag in page.tags %}
+        <a class="tag" href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>
+      {% endfor %}
+    </p>
+  {% endif %}
+  {% if page.previous or page.next %}
+    <nav class="pager" aria-label="More notes">
+      {% if page.previous %}
+        <a class="prev" href="{{ page.previous.url | relative_url }}">
+          <span class="kicker">Older</span>
+          <span>{{ page.previous.title }}</span>
+        </a>
+      {% else %}
+        <span></span>
+      {% endif %}
+      {% if page.next %}
+        <a class="next" href="{{ page.next.url | relative_url }}">
+          <span class="kicker">Newer</span>
+          <span>{{ page.next.title }}</span>
+        </a>
+      {% endif %}
+    </nav>
+  {% endif %}
+</article>
