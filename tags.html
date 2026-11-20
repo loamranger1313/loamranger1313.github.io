@@ -1,0 +1,30 @@
+---
+layout: page
+title: Tags
+permalink: /tags/
+description: Notes grouped by tag.
+---
+
+<p>Notes grouped by tag. Categories are listed on the <a href="{{ '/categories/' | relative_url }}">categories</a> page. <a href="{{ '/writeups/' | relative_url }}">Writeups</a> and <a href="{{ '/labs/' | relative_url }}">labs</a> each have their own page.</p>
+
+{% assign tags = site.tags | sort %}
+{% if tags.size > 0 %}
+<ul class="tag-index">
+  {% for tag in tags %}
+    <li><a class="tag" href="#{{ tag[0] | slugify }}">{{ tag[0] }} <span class="count">{{ tag[1].size }}</span></a></li>
+  {% endfor %}
+</ul>
+{% for tag in tags %}
+  <h2 id="{{ tag[0] | slugify }}">{{ tag[0] }}</h2>
+  <ul class="archive">
+    {% for post in tag[1] %}
+      <li>
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endfor %}
+{% else %}
+<p>No tags yet.</p>
+{% endif %}

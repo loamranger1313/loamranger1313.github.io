@@ -1,0 +1,19 @@
+---
+layout: page
+title: Writeups
+permalink: /writeups/
+description: Practice-target walkthroughs and CTF-style notes.
+---
+
+<p>Walkthroughs of practice targets and CTF-style labs.</p>
+
+{% assign posts = site.categories.writeups %}
+{% if posts %}
+<section class="entries" aria-label="Writeups">
+  {% for post in posts %}
+    {% include entry.html post=post show_category=false %}
+  {% endfor %}
+</section>
+{% else %}
+<p>No writeups yet.</p>
+{% endif %}

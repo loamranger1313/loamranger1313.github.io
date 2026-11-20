@@ -1,0 +1,19 @@
+---
+layout: page
+title: Labs
+permalink: /labs/
+description: Homelab setup, networking notes, and tool notes.
+---
+
+<p>Homelab setup, networking notes, and tool notes.</p>
+
+{% assign posts = site.categories.labs %}
+{% if posts %}
+<section class="entries" aria-label="Labs">
+  {% for post in posts %}
+    {% include entry.html post=post show_category=false %}
+  {% endfor %}
+</section>
+{% else %}
+<p>No lab notes yet.</p>
+{% endif %}

@@ -1,0 +1,29 @@
+<article class="entry">
+  <p class="kicker">
+    {% if include.show_category %}
+      {% assign cat = include.post.categories | first %}
+      {% if cat %}
+        {% if cat == "writeups" %}
+          <a href="{{ '/writeups/' | relative_url }}">{{ cat }}</a>
+        {% elsif cat == "labs" %}
+          <a href="{{ '/labs/' | relative_url }}">{{ cat }}</a>
+        {% else %}
+          <a href="{{ '/categories/' | relative_url }}#{{ cat | slugify }}">{{ cat }}</a>
+        {% endif %}
+        <span aria-hidden="true">·</span>
+      {% endif %}
+    {% endif %}
+    <time datetime="{{ include.post.date | date_to_xmlschema }}">{{ include.post.date | date: "%B %-d, %Y" }}</time>
+  </p>
+  <h2><a href="{{ include.post.url | relative_url }}">{{ include.post.title }}</a></h2>
+  {% if include.post.description %}
+    <p class="dek">{{ include.post.description }}</p>
+  {% endif %}
+  {% if include.post.tags.size > 0 %}
+    <p class="tags">
+      {% for tag in include.post.tags %}
+        <a class="tag" href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>
+      {% endfor %}
+    </p>
+  {% endif %}
+</article>
